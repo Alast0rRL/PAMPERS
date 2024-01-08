@@ -47,4 +47,4 @@ try:
     while True:
     	request(listen())
 except:
-	say('Выключаюсь')
+	say('Выключаюсь') 

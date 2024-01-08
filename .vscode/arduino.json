@@ -1,8 +1,0 @@
-{
-    "board": "arduino:avr:nano",
-    "output": "../ArduinoBuild",
-    "sketch": "Hands\\Hands.ino",
-    "port": "COM3",
-    "configuration": "cpu=atmega328old",
-    "programmer": "arduinoisporg"
-}
