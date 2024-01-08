@@ -11,8 +11,8 @@
 </p>
 </p>
 Кодировка:<br>
-1-led_on
-0-led_off
-2-servo_write
+1-led_on<br>
+0-led_off<br>
+2-servo_write<br>
 </p>
 </body>
