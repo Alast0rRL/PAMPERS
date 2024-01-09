@@ -13,26 +13,28 @@ def say(a):
     print(a)
     start.say(a)
     start.runAndWait()
-#Функция "Слушай о'кей памперса"
-def listen_pampers():
+#Функция Слушай_памперса
+def listen_pamp():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.pause_threshold = 1
         r.adjust_for_ambient_noise(source, duration = 1)
         audio = r.listen(source)
         try:
-            pampers_words = r.recognize_google(audio, language="ru-RU").lower()
-            print(pampers_words)
+            task_pamp = r.recognize_google(audio, language="ru-RU").lower()
+            print(task_pamp)
+            request_pamp()
         except:
-            pampers_words = listen_pampers()
-        return pampers_words
-#Функция проверки о'кей памперса
-def request_pamp(pampers_words):
-    if("о'кей памперс","о'кей pampers" in pampers_words):
-        request(listen)
+            task_pamp = listen_pamp()
+        return task_pamp
+#Функция "Если памперс"
+def request_pamp(task_pamp):
+    if("о'кей пампер"in task_pamp)and("о'кей pampers"in task_pamp):   
+        say('Памперс слушает request')
+        listen()
     else:
-        request_pamp(listen_pampers())
-#Функция Слушай
+        say("ошибка")
+#Функция слушай
 def listen():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -43,27 +45,27 @@ def listen():
         try:
             task = r.recognize_google(audio, language="ru-RU").lower()
             print(task)
+            request()
         except:
             task = listen()
         return task
-#Функция "Делй"
+#Функция делай
 def request(task):
-    if("включи свет" in task)and("свет"):
+    if("включи свет" in task)and("свет"in task):
         say("Включаю светодиод")
         ser.write(b'1')
     elif "выключи свет" in task:
         say("Выключаю светодиод")
         ser.write(b'0')
-    elif "pampers серво" in task:
+    elif("двигатель" in task):
         say("Кручу")  
         ser.write(b'2')
     elif "о'кей pampers" in task:
         say("Памперс слушает")
     elif "стоп" in task:
         sys.exit()
-
         
     
 #Стартуем
 while True:
-        request_pamp(listen_pampers())
+        request_pamp(listen_pamp())
