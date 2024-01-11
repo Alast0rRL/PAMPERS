@@ -1,26 +1,20 @@
-import os
 import openai
-openai.api_key = os.getenv("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")
 
-completion = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  messages=[
-    {"role": "user", "content": "Tell the world about the ChatGPT API in the style of a pirate."}
-  ]
+# Устанавливаем ключ API
+openai.api_key = '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'
+# Текст, на основе которого будет генерироваться ответ
+# Текст, на основе которого будет генерироваться ответ
+input_text = "Задайте вопрос GPT-3:"
+
+# Вызываем GPT-3 для генерации ответа
+response = openai.completions.create(
+    model="text-davinci-001",  # Выберите подходящую модель, например, "text-davinci-003"
+    prompt=input_text,
+    max_tokens=150  # Максимальное количество токенов в ответе
 )
 
-print(completion.choices[0].message.content)
-import openai
+# Извлекаем сгенерированный текст из ответа
+generated_text = response['choices'][0]['text'].strip()
 
-while True:
-    content = input("User: ")
-    messages.append({"role": "user", "content": content})
-    
-    completion = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo",
-      messages=messages
-    )
-
-    chat_response = completion.choices[0].message.content
-    print(f'ChatGPT: {chat_response}')
-    messages.append({"role": "assistant", "content": chat_response})
+# Выводим сгенерированный текст
+print("Ответ GPT-3:", generated_text)

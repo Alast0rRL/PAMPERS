@@ -11,30 +11,19 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available()){
-    byte mode = Serial.read();
-    switch (mode) {
-      case '1':
-        digitalWrite(13, 1);
-        break;
-      case '0':
-        digitalWrite(13, 0);
-        break;
-      case '2':
-        servo1.write(0);
-        delay(1500);
-        servo1.write(180);
-        delay(1500);
-        break;
-      case '3':
-        if (Serial.available()){
-          Serial.println("123");
-          byte grad = Serial.parseInt();
-          Serial.println(grad);
-          servo1.write(grad);
-          delay(1500);
-          break;
-      }
-    }
-  }   
-}
+int command = Serial.parseInt(); // Считываем число из COM-порта
+// В зависимости от значения, выполняем соответствующее действие
+if (command == 1) {
+  digitalWrite(13, HIGH); // Включаем светодиод
+  } else if (command == 2) {
+  digitalWrite(13, LOW); // Выключаем светодиод
+  } else if (command == 3) {
+  // Считываем градус поворота
+  int angle = Serial.parseInt();
+  Serial.print("Received angle: ");
+  Serial.println(angle);
+  // Поворачиваем сервопривод
+  servo1.write(angle);
+  delay(15); // Делаем небольшую задержку для стабилизации сервопривода
+  }
+}   
