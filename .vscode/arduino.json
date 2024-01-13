@@ -3,5 +3,5 @@
     "configuration": "cpu=atmega328old",
     "board": "arduino:avr:nano",
     "programmer": "arduinoisp",
-    "sketch": "Pampers.ino"
+    "sketch": "Hands.ino"
 }
