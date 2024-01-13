@@ -42,8 +42,9 @@ def process_command(command):
         say("Выключаю светодиод")
         ser.write(b'0')
     elif "двигатель" in command:
-        say("Кручу")
         ser.write(b'3')
+        ser.write(b'0')
+        say("Кручу")
     elif "поверни на" in command and "градусов" in command:
         print("Не удалось извлечь угол из команды")
         #match = re.search(r'(?:угол|градусов)\s*(\d+)', command)
@@ -55,6 +56,7 @@ def process_command(command):
         ##
         print()
     elif "стоп" in command:
+        say("Стоп")
         global listening_mode
         listening_mode = False
 
@@ -67,7 +69,11 @@ def main():
         if not listening_mode:
             command = listen()
 
-            if command and ("о'кей пампер" in command or "о'кей pampers" in command or "о'кей тостер"):
+            if command and ("о'кей пампер" in command or "о'кей pampers" in command):
+                say("Памперс слушает")
+                listening_mode = True
+            
+            if command and ("о'кей тостер" in command):
                 say("Памперс слушает")
                 listening_mode = True
 
