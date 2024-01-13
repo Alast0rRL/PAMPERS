@@ -12,16 +12,10 @@ class ChatInterface(BoxLayout):
     def __init__(self, **kwargs):
         super(ChatInterface, self).__init__(**kwargs)
 
-        # Устанавливаем вертикальную ориентацию для главного контейнера
         self.orientation = 'vertical'
-
-        # Создаем ScrollView для истории чата
         self.chat_history = ScrollView()
-        # Создаем контейнер для сообщений с вертикальной ориентацией, устанавливаем размер и отступы
         self.messages_layout = BoxLayout(orientation='vertical', spacing=10, size_hint_y=None, padding=(10, 10))
-        # Добавляем контейнер для сообщений в ScrollView
         self.chat_history.add_widget(self.messages_layout)
-        # Добавляем ScrollView в главный контейнер
         self.add_widget(self.chat_history)
 
         # Создаем поле ввода сообщения и кнопку отправки
@@ -42,15 +36,14 @@ class ChatInterface(BoxLayout):
     def send_message(self, instance):
         message = self.message_input.text
         if message:
-            # Добавляем сообщение пользователя в интерфейс
             self.add_user_message(message)
-            # Проверяем, если сообщение - "привет", то добавляем ответ от бота
             if message.lower() == 'привет':
                 self.add_bot_response("Привет, как дела?")
 
-            # Очищаем поле ввода и прокручиваем историю сообщений вверх
             self.message_input.text = ''
-            self.chat_history.scroll_y = 0
+            
+            # Используем 1.0 для прокрутки вниз и инвертируем, чтобы прокрутить вверх
+            self.chat_history.scroll_y = 1.0
 
     # Функция добавления сообщения пользователя в интерфейс
     def add_user_message(self, message):
