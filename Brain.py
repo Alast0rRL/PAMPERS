@@ -45,15 +45,6 @@ def process_command(command):
         ser.write(b'3')
         ser.write(b'0')
         say("Кручу")
-    elif "поверни на" in command and "градусов" in command:
-        print("Не удалось извлечь угол из команды")
-        #match = re.search(r'(?:угол|градусов)\s*(\d+)', command)
-        #angle = int(match.group(1))
-        #return angle
-        #angle_value = extract_angle(command)
-        #print(f"Извлеченный угол: {angle_value} градусов")
-
-        ##
         print()
     elif "стоп" in command:
         say("Стоп")
@@ -63,7 +54,7 @@ def process_command(command):
 # Основная функция программы
 def main():
     global listening_mode
-
+    say('Активация прошла успешно')
     while True:
         # Если не в режиме прослушивания, ждем фразу "Окей памперс"
         if not listening_mode:
@@ -83,9 +74,3 @@ def main():
 
             if command:
                 process_command(command)
-
-
-# Запуск программы
-say('Активация прошла успешно')
-if __name__ == "__main__":
-    main()
