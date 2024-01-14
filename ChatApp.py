@@ -1,3 +1,9 @@
+import speech_recognition as sr
+import pyttsx3
+import serial
+import time
+import sys
+import re
 # Импортируем необходимые классы из библиотеки Kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
@@ -6,6 +12,22 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
 from kivy.core.window import Window
+
+# Инициализация порта и библиотек для речи
+ser = serial.Serial('COM3', 9600)
+start = pyttsx3.init()
+
+# Флаг для определения режима прослушивания
+listening_mode = False
+
+# Функция для произношения текста и вывода в консоль
+def say(text):
+    print(text)
+    start.say(text)
+    start.runAndWait()
+
+
+
 
 # Определяем интерфейс чата с использованием Kivy
 class ChatInterface(BoxLayout):
@@ -19,10 +41,13 @@ class ChatInterface(BoxLayout):
         self.add_widget(self.chat_history)
 
         # Создаем поле ввода сообщения и кнопку отправки
-        self.message_input = TextInput(size_hint_y=None, height=40)
+        self.message_input = TextInput(size_hint_y=None, height=40, multiline=False)
         self.send_button = Button(text="Отправить", size_hint_y=None, height=40)
         # Привязываем функцию отправки сообщения к нажатию на кнопку
         self.send_button.bind(on_press=self.send_message)
+
+        # Привязываем функцию отправки сообщения к событию "Enter" в поле ввода
+        self.message_input.bind(on_text_validate=self.send_message)
 
         # Создаем контейнер для ввода сообщения и кнопки
         input_box = BoxLayout(size_hint_y=None, height=40, padding=(10, 10))
@@ -31,6 +56,10 @@ class ChatInterface(BoxLayout):
 
         # Добавляем контейнер для ввода сообщения и кнопки в главный контейнер
         self.add_widget(input_box)
+
+
+
+
 
     # Функция отправки сообщения
     def send_message(self, instance):
