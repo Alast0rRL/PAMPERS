@@ -1,7 +1,7 @@
 <h1 align="center">Проект <a href="" target="_blank">"ПАМПЕРС"</a> 
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
 <p>
-Активное участие в разработке принимал 
+<br>Активное участие в разработке принимал <br>
 П-Профессианальный<br>
 А-Автоматический<br>
 М-Многофункиональный<br>
