@@ -1,7 +1,7 @@
 <h1 align="center">Проект <a href="" target="_blank">"ПАМПЕРС"</a> 
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
 <p>
-<h2>Активное участие в разработке принимал <code>[Панов Александр](https://github.com/DarkKing656)</code><h2>
+<h2>Активное участие в разработке принимал Панов Александр (https://github.com/DarkKing656)<h2>
 П-Профессианальный<br>
 А-Автоматический<br>
 М-Многофункиональный<br>
